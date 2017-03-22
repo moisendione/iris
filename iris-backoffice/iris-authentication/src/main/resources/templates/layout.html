@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta th:charset="utf-8"/>
+  <meta th:http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link href="../../static/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/css/bootstrap.min.css}"/>
+  <link href="../../static/css/daterangepicker.css" rel="stylesheet" media="all" th:href="@{/css/daterangepicker.css}"/>
+  <link href="../../static/css/styles.css" rel="stylesheet" media="screen" th:href="@{/css/styles.css}"/>
+  <link href="../../static/css/connexion.css" rel="stylesheet" media="screen" th:href="@{/css/connexion.css}"/>
+  <link href="../../static/css/styles.table.ds.css" rel="stylesheet" media="screen" th:href="@{/css/styles.table.ds.css}"/>
+
+  <script src="../../static/js/formden.js" th:inline="javascript" th:src="@{/js/formden.js}"></script>
+  <link href="../../static/css/bootstrap-iso.css" rel="stylesheet" media="screen" th:href="@{/css/bootstrap-iso.css}"/>
+
+  <title>IRIS Front Office</title>
+</head>
+<body>
+<div id="wrapper" class="container" style="width:100% !important;float:left;overflow-x: hidden;">
+  <div class="box_header">
+  <section class="row l-header">
+    <header>
+      <div class="col-md-2">
+        <a href="#" th:href="@{/}"><img th:src="@{/images/logo_financia.jpg}" src="../../static/images/logo_financia.jpg" th:style="'margin-top:4px;'"/></a>
+      </div>
+
+      <div class="col-md-7" layout:fragment="top-menu-left">
+        <ul class="nav">
+          <li th:style="'background: url(' + @{/images/sep.jpg} + ') no-repeat right center transparent;'"><a href="#" th:href="@{/}">OPCVM</a></li>
+          <li th:style="'background: url(' + @{/images/sep.jpg} + ') no-repeat right center transparent;'"><a href="#" th:href="@{http://iris.peopleinput.biz:8086/}">Bourse - Backoffice</a></li>
+          <li th:style="'background: url(' + @{/images/sep.jpg} + ') no-repeat right center transparent;'"><a href="#" class="actif" th:href="@{/}">Bourse - Frontoffice</a></li>
+          <li th:style="'background: url(' + @{/images/sep.jpg} + ') no-repeat right center transparent;'"><a href="#" th:href="@{/}">Titres</a></li>
+        </ul>
+      </div>
+
+      <aside class="col-md-3 pull-right" layout:fragment="top-menu-right"  th:style="'position:relative;left:100px;'">
+        <ul class="nav-pills">
+          <li role="presentation" id="presentation"><a href="#" th:style="'background:url(' + @{/images/picto_user.png} + ') no-repeat 8px 5px #e6e6e6;color:#203864;border-radius:4px;'"><span th:text="${#authentication.name}"></span> </a></li>
+          <li th:if="${#authorization.expression('isAuthenticated()')}">
+            <a href="/logout" th:href="@{/logout}" th:style="'background:url(' + @{/images/picto_pass.png} + ') no-repeat 8px 5px #e6e6e6;color:#203864;border-radius:4px;'">Logout</a>
+          </li>
+        </ul>
+      </aside>
+    </header>
+  </section>
+ </div>
+
+  <section class="row l-content">
+    <nav class="col-xs-12 col-md-3 leftside">
+      <aside layout:fragment="contextual_menu">
+        <ul><li><a href="/clients" th:href="@{/clients}" class="actif" th:text="#{layout.contextual_menu.customers}">Clients</a></li></ul>
+        <ul><li><a href="/markets" th:href="@{/markets}" th:text="#{layout.contextual_menu.markets}">Marchés</a></li></ul>
+        <ul><li><a href="/" th:href="@{/}" th:text="#{layout.contextual_menu.reports}">Prospects</a></li></ul>
+      </aside>
+      <div class="mention">
+        <span><img th:src="@{/images/mention.jpg}" src="../../static/images/mention.jpg" /></span>
+          <div style="margin-left:1px;margin-top:-3px;font-size:11px;color:#C9C9C9;">
+            Copyright iRIS
+            <span th:text="#{copyright.start.year((${#dates.format(#dates.createNow(), 'yyyy')}))}">2016</span>
+
+            <div style="display: inline;" th:if="${#dates.format(#dates.createNow(), 'yyyy') != '2016'}">
+              - <span th:text="#{copyright.end.year(${#dates.format(#dates.createNow(), 'yyyy')}+1)}">2017</span>
+            </div>
+          </div>
+        </div>
+    </nav>
+
+    <div class="col-xs-12 col-md-9 content rightside">
+
+      <h1 layout:fragment="title_page"></h1>
+
+      <div layout:fragment="msg_alert"></div>
+
+
+      <div id="page-title" layout:fragment="title">
+        <h2 class="title" >fragment title</h2>
+      </div>
+
+
+      <div layout:fragment="tool" class="tool"></div>
+      
+      <section id="content" class="" layout:fragment="content">
+        content
+      </section>
+
+    </div>
+  </section>
+  <!--/*/ <th:block th:if="${modal_step == 'cash_reservation_new_operation'}" th:include="trading/modal/cash_reservation_new_operations:: cash_reservation_new_operation"></th:block> /*/-->
+  <!--/*/ <th:block th:if="${modal_step == 'cash_deposit_step2'}" th:include="client/modal/cash-deposit-step2:: cash_deposit_step2"></th:block> /*/-->
+  <!--/*/ <th:block th:include="trading/modal/custody_operation_list:: custody_operation_list"></th:block> /*/-->
+  <!--/*/ <th:block th:include="trading/modal/add_custody_fees_operation:: add_custody_fees_operation"></th:block> /*/-->
+  <!--/*/ <th:block th:include="trading/modal/cash_deposit_list:: cash_deposit_list"></th:block> /*/-->
+  <!--/*/ <th:block th:include="trading/modal/cash_deposit_new_operations:: cash_deposit_new_operations"></th:block> /*/-->
+
+
+  <!--/*/ <th:block th:include="trading/modal/dividend_payment_list:: dividend_payment_list"></th:block> /*/-->
+  <!--/*/ <th:block th:include="trading/modal/add_dividend_payment:: add_dividend_payment"></th:block> /*/-->
+
+  <!--/*/ <th:block th:include="trading/modal/asset_transfert_list:: asset_transfert_list"></th:block> /*/-->
+  <!--/*/ <th:block th:include="trading/modal/asset_collateral_list:: asset_collateral_list"></th:block> /*/-->
+  <!--/*/ <th:block th:if="${showAssetTransfert == 'true'}" th:include="trading/modal/add_asset_transfert:: add_asset_transfert"></th:block> /*/-->
+  <!--/*/ <th:block th:if="${showAssetCollateralForm == 'true'}" th:include="trading/modal/add_asset_collateral:: add_asset_collateral"></th:block> /*/-->
+  <!--/*/ <th:block th:include="trading/modal/confirm_cancellation_collateral:: confirm_cancellation_collateral"></th:block> /*/-->
+  <!--/*/ <th:block th:include="trading/modal/confirm_cancellation_transfert:: confirm_cancellation_transfert"></th:block> /*/-->
+
+  <!--/*/ <input type="hidden" id="showAssetTransfertHistory" th:value="${showAssetTransfertHistory}"/>/*/-->
+  <!--/*/ <input type="hidden" id="clickSelectSense" th:value="${clickSelectSense}"/>/*/-->
+  <!--/*/ <input type="hidden" id="refreshAssetList" th:value="${refreshAssetList}"/>/*/-->
+  <!--/*/ <input type="hidden" id="refreshAssetCollateralList" th:value="${refreshAssetCollateralList}"/>/*/-->
+  <!--/*/ <input type="hidden" id="showAssetCollateralHistory" th:value="${showAssetCollateralHistory}"/>/*/-->
+  <!--/*/ <input type="hidden" id="showCollateralDetails" th:value="${showCollateralDetails}"/>/*/-->
+  <!--/*/ <input type="hidden" id="showTransfertDetails" th:value="${showTransfertDetails}"/>/*/-->
+  <!--/*/ <input type="hidden" id="hideBtnSaveCollateral" th:value="${hideBtnSaveCollateral}"/>/*/-->
+  <!--/*/ <input type="hidden" id="hideBtnSaveTransfert" th:value="${hideBtnSaveTransfert}"/>/*/-->
+
+  <!--/*/ <th:block th:include="trading/modal/interest_payment_list:: interest_payment_list"></th:block> /*/-->
+  <!--/*/ <th:block th:include="trading/modal/add_interest_payment:: add_interest_payment"></th:block> /*/-->
+  <!--/*/ <th:block th:include="trading/modal/suppress_cash_deposit:: suppress_cash_deposit"></th:block> /*/-->
+
+  <!--/*/ <th:block th:include="trading/modal/operation_details:: operation_details"></th:block> /*/-->
+
+</div>
+
+<!--<script src="../../static/js/jquery-1.8.2.min.js" th:src="@{/js/jquery-1.8.2.min.js}"></script>-->
+<script src="../../static/js/jquery-1.11.3.min.js" th:inline="javascript" th:src="@{/js/jquery-1.11.3.min.js}"></script>
+
+<script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script src="../../static/js/jquery.autocomplete.js" th:inline="javascript" th:src="@{/js/jquery.autocomplete.js}"></script>
+<script src="../../static/js/validator.js" th:inline="javascript" th:src="@{/js/validator.js}"></script>
+<script src="../../static/js/custom.js" th:inline="javascript" th:src="@{/js/custom.js}"></script>
+<script src="../../static/js/highcharts.js" th:src="@{/js/highcharts.js}"></script>
+<script src="../../static/js/iris-charts.js" th:src="@{/js/iris-charts.js}"></script>
+<script th:inline="javascript">
+
+  function mydaterangepicker (start_date, end_date, trading_creation_date, containerId, clientId, csrf_name, csrf_value) {
+
+    $(containerId).daterangepicker({
+          startDate: start_date,
+          endDate: end_date,
+          minDate: trading_creation_date,
+          maxDate: true,
+          dateLimit: {days: 90},
+          showDropdowns: true,
+          showWeekNumbers: true,
+          timePicker: false,
+          timePickerIncrement: 1,
+          timePicker12Hour: true,
+          ranges: {
+            [[#{daterangepicker.today}]]: [moment(), moment()],
+            [[#{daterangepicker.yesterday}]]: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            [[#{daterangepicker.lastsevendays}]]: [moment().subtract(6, 'days'), moment()],
+            [[#{daterangepicker.lastthirtydays}]]: [moment().subtract(29, 'days'), moment()],
+            [[#{daterangepicker.thismonth}]]: [moment().startOf('month'), moment().endOf('month')],
+            [[#{daterangepicker.lastmonth}]]: [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+            [[#{daterangepicker.lasttwomonth}]]: [moment().subtract(1, 'month').startOf('month'), moment().subtract(2, 'month').endOf('month')],
+            [[#{daterangepicker.lastthreemonth}]]: [moment().subtract(1, 'month').startOf('month'), moment().subtract(3, 'month').endOf('month')]
+          },
+          opens: 'left',
+          drops: 'down',
+          buttonClasses: ['btn', 'btn-sm'],
+          applyClass: 'btn-primary',
+          cancelClass: 'btn-default',
+          locale: {
+            format: 'DD-MM-YYYY',
+            separator: ' / ',
+            applyLabel: [[#{daterangepicker.submit}]],
+            cancelLabel: [[#{daterangepicker.cancel}]],
+            fromLabel: [[#{daterangepicker.from}]],
+            toLabel: [[#{daterangepicker.to}]],
+            customRangeLabel: [[#{daterangepicker.custom}]],
+            daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+            monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            firstDay: 1
+          }
+        },
+        function(start, end, label) {
+          console.log("A new date range was chosen: " + start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY')+ ', label : '+label);
+          sendPost('/client/'+clientId+'/put-period', {startDate: start.format('DD-MM-YYYY'), entdDate: end.format('DD-MM-YYYY')}, "Post",csrf_name, csrf_value);
+        });
+
+  }
+
+</script>
+
+<script layout:fragment="js">
+</script>
+
+<!-- scripts pour le datepicker -->
+</body>
+<script src="../../static/js/dailysecurity-form.js" th:inline="javascript" th:src="@{/js/dailysecurity-form.js}"></script>
+<script src="../../static/js/bootstrap-datepicker.min.js" th:inline="javascript" th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<link href="../../static/css/bootstrap-datepicker3.css" rel="stylesheet" media="screen" th:href="@{/css/bootstrap-datepicker3.css}"/>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+  $('#transfertBeginDate').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true, orientation: 'top left',});
+  $('#transfertEndDate').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true, orientation: 'top left',});
+  $('#collateralBeginDate').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true, orientation: 'top left',});
+  $('#collateralEndDate').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true, orientation: 'top left',});
+    $('#transfertDateFormId').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true, orientation: 'top left',});
+    $('#datepicker').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true});
+    $('#datepicker').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true});
+    $('.datepicker').datepicker({format: 'dd-mm-yyyy', autoclose: true, endDate: '+0d', todayHighlight: true, orientation: 'top left',});
+    $('.datepickers').datepicker({format: 'dd-mm-yyyy', autoclose: true, endDate: '+1d', todayHighlight: true, orientation: 'bottom left',});
+    $('.deadline').datepicker({format: 'dd-mm-yyyy', autoclose: true, todayHighlight: true, orientation: 'bottom left',});
+    $('#operationDate').datepicker({format: 'dd-mm-yyyy', autoclose: true, endDate: '+0d', todayHighlight: true, orientation: 'bottom left',});
+    $('#tradingDate').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true, orientation: 'top left',});
+    $('#tradingDate2').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true, orientation: 'top left',});
+    $('#subscriptionDate-filter-clients').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true});
+    $('#birthdate-create-lp').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true});
+    $('#birthdate-create-np').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true});
+    $('#idCardExpirationDate-create-lp').datepicker({format: "dd-mm-yyyy", autoclose:true, todayHighlight: true});
+    $('#idCardExpirationDate-create-np').datepicker({format: "dd-mm-yyyy", autoclose:true, todayHighlight: true});
+    $('#subscriptionDate-create-lp').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true});
+    $('#subscriptionDate-create-np').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true});
+    $('#creationDateOfTradingAccount').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true});
+    $('#deadlineOrderEdit').datepicker({format: "dd-mm-yyyy", autoclose:true, todayHighlight: true});
+    $('#portfolioHistoryDate').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true});
+    $('#deadlineOrderPass').datepicker({format: "dd-mm-yyyy", autoclose:true, startDate: '+0d', todayHighlight: true,});
+    $('#creationDateOrderPass').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true});
+    $('#creationDateOrderEdit').datepicker({format: "dd-mm-yyyy", autoclose:true, endDate: '+0d', todayHighlight: true});
+    $('.dateFilter').datepicker({format: "dd-mm-yyyy", autoclose:true, orientation: 'top left',});
+    $('.dateBondForm').datepicker({format: "dd-mm-yyyy", autoclose:true, todayHighlight: true, orientation: 'top left',})
+  });
+</script>
+<script src="../../static/js/moment.min.js" th:src="@{/js/moment.min.js}"></script>
+<script src="../../static/js/daterangepicker.js" th:src="@{/js/daterangepicker.js}" th:inline="javascript"></script>
+<script>
+  $('#config-text').keyup(function() {
+    eval($(this).val());
+  });
+
+  $('.configurator input, .configurator select').change(function() {
+    updateConfig();
+  });
+
+  $('.period i').click(function() {
+    $(this).parent().find('input').click();
+  });
+
+  $('#startDate').daterangepicker({
+    singleDatePicker: true,
+    startDate: moment().subtract(6, 'days')
+  });
+
+  $('#endDate').daterangepicker({
+    singleDatePicker: true,
+    startDate: moment()
+  });
+</script>
+</html>
