@@ -1,0 +1,140 @@
+.percent-up{color: green;}
+.percent-down{color: red;}
+.glyphicon-big{font-size: 15em;color: #333 !important;}
+.mutual-fund-home{margin-top: 10%;}
+fieldset.scheduler-border {
+    /*border: 1px groove #ddd !important;*/
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+    box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+}
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}
+.text-left{text-align: left !important;}
+.modal-header .close{outline: none !important;}
+
+
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+.autocomplete-suggestion { padding: 5px 5px; white-space: nowrap; overflow: hidden;}
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { color: #3399FF; }
+.graphe{margin: 0 !important;padding: 0 !important;}
+.modal-lg {  width: 760px;  height: 900px;  }
+.modal-lg .modal-footer{  padding: 0px;  }
+.not-active {
+    pointer-events: none;
+    cursor: default;
+}
+.portfolioaddorder{
+    text-align: center !important;
+}
+.portfolioaddorder .glyphicon-plus:before {
+    padding-right: 14px !important;
+    margin-left: -7px !important;
+}
+.portfolioaddorder .glyphicon-minus:before {
+    padding-right: 14px !important;
+    margin-left: 7px !important;
+}
+fieldset.bordered {
+    border: 1px solid #999999;
+    background: #fff;
+    padding: 5px !important;
+}
+fieldset.bordered legend{
+    padding: 0;
+    margin-bottom: 10px;
+    font-size: inherit;
+    line-height: inherit;
+    border: 0;
+    border-bottom: none;
+    margin-left: 6px;
+    width: inherit;
+}
+
+#myTableId .noempty{
+    color: #203864;
+    font-weight: bold;
+    max-width: 190px;
+    margin-left: 225px;
+    text-align: center;
+    padding: 8px;
+    background: #F2F2F2;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+#myTableId .empty{
+    color: #203864;
+    font-weight: bold;
+    max-width: 200px;
+    margin-left: 168px;
+    text-align: center;
+    padding: 8px;
+    background: #F2F2F2;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.compte {
+    margin-left: 43px !important;
+    /* width: 33px; */
+    height: 26px !important;
+}
+
+.myTableId2{background: #fff;margin-top: 10px !important;margin-bottom: 10px !important;}
+.myTableId2 thead tr{background: #203864;}
+.myTableId2 thead tr th{
+    border: none;
+    color: #FFF;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+    font-size: 13px;
+    text-transform: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #ddd;
+}
+
+.myTableId2 tbody tr{border-bottom: 1px solid #f0f0f0;}
+.myTableId2 tbody tr:last-child{border-bottom: none;}
+.myTableId2 tbody tr td{
+    padding: 22px 10px 1px 10px;
+    text-align: left;
+    font-size: 12px;
+    color: #333;
+    vertical-align: bottom;
+    border: 1px solid #ddd;
+}
+.myTableId2 tbody tr td a{
+    font-weight: bold;
+    text-transform: none;
+    color: #203864;
+}
+.myTableId2 tbody tr td a:hover{
+    text-decoration: none;
+    outline: none;
+}
+
+.myTableId_length label, div.dataTables_info{
+    color: #7f7f7f;
+    font-weight: normal;
+    font-size: 12px;
+    margin: 0;
+    text-align: left;
+}
+.text-right{text-align: right !important;}

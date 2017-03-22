@@ -1,0 +1,68 @@
+
+.container-ds{
+  width:95%;
+  margin:auto;
+}
+.fixed-ds{
+  top: 9.4%;
+  position:fixed;
+  width:auto;
+  display:none;
+  border:none;
+}
+
+.scrollMore{
+  margin-top:600px;
+}
+
+.up{
+  cursor:pointer;
+}
+
+.up2{
+  cursor:pointer;
+}
+
+.align-right{
+  text-align: right;
+}
+
+.color-positive{
+  color: green;
+}
+
+.color-negative{
+  color: red;
+}
+
+.align-perform{
+  float: right;
+}
+
+.modal-waiting{
+  display:    none;
+      position:   fixed;
+      z-index:    1000;
+      top:        0;
+      left:       0;
+      height:     100%;
+      width:      100%;
+      background: rgba( 255, 255, 255, .8 )
+                  url('../images/ajax-loader.gif')
+                  50% 50%
+                  no-repeat;
+}
+
+body.loading{
+  overflow: hidden;
+}
+
+body.loading .modal-waiting{
+  display: block;
+}
+
+.popover{
+    max-width: 100% !important;
+    /*width: 300px; */
+    /*height: 140px; /* Max Width of the popover (depending on the container!) */
+}

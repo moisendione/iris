@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head lang="en">
+  <title>IRIS by PeopleInput</title>
+
+</head>
+<body class="home_choice">
+<h1 layout:fragment="title_page" th:text="#{layout.contextual_menu.settings}" class="title_page">Paramètres</h1>
+
+<div class="container">
+  <aside layout:fragment="contextual_menu">
+    <ul><li><a href="/dashboard" th:href="@{/dashboard}" th:text="#{layout.contextual_menu.dashboard}">Dashboard</a></li></ul>
+    <ul><li><a href="/settings" th:href="@{/settings}" class="actif"  th:text="#{layout.contextual_menu.settings}">Paramètres</a></li></ul>
+    <ul><li><a href="/user" th:href="@{/user}" th:text="#{layout.contextual_menu.user}">Utilisateurs</a></li></ul>
+  </aside>
+  <section id="content" class="" layout:fragment="content">
+    <section class="row">
+      <aside class="col-md-6">
+        <h4 th:text="#{settings.menu.company}">Entreprise</h4>
+        <ul>
+          <li><a href="/settings/new" th:href="@{/settings/new}"  th:text="#{settings.menu.general}">Paramètres généraux</a> </li>
+          <li><a href="/settings/rates" th:href="@{/settings/rates}" th:text="#{settings.menu.rates}">Taux</a> </li>
+        </ul>
+      </aside>
+      <aside class="col-md-6 ">
+        <h4 th:text="#{settings.menu.accounting}">Plan comptable</h4>
+        <ul>
+          <li><a href="/settings/accounts" th:href="@{/settings/accounts}">Comptes</a> </li>
+          <li><a href="/settings/add/account" th:href="@{/settings/add/account}">Ajouter</a> </li>
+        </ul>
+      </aside>
+    </section>
+  </section>
+</div>
+</body>
+</html>

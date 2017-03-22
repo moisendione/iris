@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta th:charset="utf-8"/>
+  <meta th:http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+
+  <title>iRIS Authentication </title>
+
+  <div th:replace="/fragments/stylesheet"></div>
+
+</head>
+
+<body onload="preventBack();">
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3" style="margin-top: 50px;">
+<!--
+      <div class="alert alert-danger">
+        &lt;!&ndash;<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>&ndash;&gt;
+
+      </div>
+-->
+    </div>
+    <div class="col-md-4 col-md-offset-4">
+
+      <div class="login-panel panel panel-default">
+
+        <div class="panel-heading">
+          <h3 class="panel-title"><span class="glyphicon glyphicon-eye-open"></span></h3>
+        </div>
+        <div class="panel-body">
+          <form role="form" th:action="@{/login}" method="Post">
+            <fieldset>
+              <div class="form-group">
+                <input class="form-control" placeholder="username" name="username" type="login" id="username"/>
+              </div>
+              <div class="form-group">
+                <input class="form-control" placeholder="password" name="password" id="pass" type="password"/>
+              </div>
+<!--
+              <div class="checkbox">
+                <label>
+                  <input name="remember_me" type="checkbox" value="Remember Me" id="remember_me"/>Se souvenir de moi
+                </label>
+              </div>
+-->
+              <button id="signupb" type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}" type="text/javascript"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script th:src="@{/bower_components/metisMenu/dist/metisMenu.min.js}"></script>
+
+<!-- Morris Charts JavaScript -->
+<script th:src="@{/bower_components/raphael/raphael-min.js}"></script>
+<script th:src="@{/bower_components/morrisjs/morris.min.js}"></script>
+
+<!-- Custom Theme JavaScript -->
+<script th:src="@{/dist/js/sb-admin-2.js}"></script>
+<script th:src="@{/js/morris-data.js}"></script>
+
+<script>
+  $(function() {
+
+    if (localStorage.chkbx != '') {
+      $('#remember_me').attr('checked', 'checked');
+      $('#username').val(localStorage.usrname);
+      $('#pass').val(localStorage.pass);
+    } else {
+      $('#remember_me').removeAttr('checked');
+      $('#username').val('');
+      $('#pass').val('');
+    }
+
+    $('#remember_me').click(function() {
+
+      if ($('#remember_me').is(':checked')) {
+        // save username and password
+        localStorage.usrname = $('#username').val();
+        localStorage.pass = $('#pass').val();
+        localStorage.chkbx = $('#remember_me').val();
+      } else {
+        localStorage.username = '';
+        localStorage.pass = '';
+        localStorage.chkbx = '';
+      }
+    });
+  });
+</script>
+
+</body>
+
+</html>

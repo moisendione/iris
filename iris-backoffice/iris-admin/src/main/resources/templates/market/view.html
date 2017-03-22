@@ -1,0 +1,38 @@
+<div
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     xmlns:th="http://www.thymeleaf.org"
+     layout:decorator="base">
+  <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+  <h1 layout:fragment="header">
+    Market Details
+  </h1>
+
+  <div layout:fragment="body">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Market Id:</label>
+
+        <div class="col-sm-10">
+          <p class="form-control-static" th:text="${marketForm.id}">Market Id</p></div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Name:</label>
+
+        <div class="col-sm-10">
+          <p class="form-control-static" th:text="${marketForm.name}">name</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Description:</label>
+
+        <div class="col-sm-10">
+          <p class="form-control-static" th:text="${marketForm.description}">description</p>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

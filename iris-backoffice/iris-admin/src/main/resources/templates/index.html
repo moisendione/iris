@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head lang="en">
+  <title>IRIS by PeopleInput</title>
+
+</head>
+<body class="home_choice">
+<div class="container">
+  <section  layout:fragment="title">
+    <!--h2 >Accueil</h2-->
+
+  </section>
+  <section class="col-md-4" layout:fragment="contextual_menu">
+  </section>
+  <section layout:fragment="content">
+    <section class="row mutual-fund-home" >
+      <aside class="col-md-4 text-center">
+        <a href="#" th:href="@{/opcvms}">
+          <img th:src="@{/images/home128.jpg}" src="../../static/images/home128.jpg" />
+          <div class="link">OPCVMs</div>
+        </a>
+      </aside>
+      <aside class="col-md-4 text-center">
+        <a href="#">
+          <img th:src="@{/images/bill128.jpg}" src="../../static/images/bill128.jpg" />
+          <div class="link">Facturation</div>
+        </a>
+      </aside>
+      <aside class="col-md-4 text-center">
+        <a href="#">
+          <img th:src="@{/images/report128.jpg}" src="../../static/images/report128.jpg" />
+          <div class="link">Rapports</div>
+        </a>
+      </aside>
+    </section>
+  </section>
+</div>
+</body>
+</html>

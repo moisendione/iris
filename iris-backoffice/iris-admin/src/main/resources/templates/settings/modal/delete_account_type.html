@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en"></head>
+<body>
+<section th:fragment="delete_account_type">
+    <div class="modal fade" id="delete_account_type" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+         aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" th:style="'display:block'">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">
+              <legend>
+                <h4 th:style="'color:white'">
+                  <span>Confirmation</span>
+                </h4>
+              </legend>
+            </h4>
+
+          </div>
+          <div class="modal-body">
+             <div class="row" th:style="'text-align: center;'">
+               <span th:text="#{accounttype.list.accountnumber}">Numéro : </span><span id="accountNumberDeleteAccountType"></span> |
+               <span th:text="#{accounttype.list.description}">Libellé : </span><span id="typeDeleteAccountType"></span>
+             </div>
+            <div class="row" th:style="'margin-top: 20px; text-align: center;'">
+              <span th:style="'text-align: center; color: red; font-weight: bold;'" th:text="#{accounttype.modal.confirm.text}">
+                Etes-vous sûr de vouloir supprimer ce type de compte ?
+              </span>
+            </div>
+            <input value="" id="idAccountNumberToDeleteAccountType" type="hidden"/>
+          </div>
+
+          <div class="modal-footer">
+            <div class="row">
+              <button class="btn btn-danger" data-dismiss="modal" th:style="'float:right; margin-right: 10px'">
+                <span>Non</span>
+              </button>
+              <button type="submit" id="confirmDeleteAccountType" class="btn btn-success" th:style="'float:right; margin-right: 20px;'">
+                <span>Oui</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+</body>
+</html>

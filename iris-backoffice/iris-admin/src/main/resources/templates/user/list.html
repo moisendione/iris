@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+      layout:decorator="layout">
+
+
+
+  <head lang="en">
+    <title>IRIS by PeopleInput</title>
+
+  </head>
+  <body class="home_choice">
+  <h1 layout:fragment="title_page" th:text="#{layout.contextual_menu.user}" class="title_page">Utilisateurs</h1>
+
+  <div class="modal-body">
+
+    <div layout:fragment="contextual_menu">
+     <ul><li><a href="/dashboard" th:href="@{/dashboard}" th:text="#{layout.contextual_menu.dashboard}">Dashboard</a></li></ul>
+     <ul><li><a href="/settings" th:href="@{/settings}" th:text="#{layout.contextual_menu.settings}">Paramètres</a></li></ul>
+     <ul><li><a href="/user" class="actif" th:href="@{/user}" th:text="#{layout.contextual_menu.user}">Utilisateurs</a></li></ul>
+      <ul class="sou_menu"><li><a class="sous_menu_users" href="/user">Liste utilisateurs</a></li></ul>
+      <ul class="sou_menu"><li><a class="sous_menu_user_actions" th:href="@{/user/actions-log}">Historique des actions</a></li></ul>
+    </div>
+
+  <section id="content" class="" layout:fragment="content">
+    <input type="hidden" id="idErrorFound" th:value="${errorFound}"/>
+
+
+    <section th:if="${messageNewUser =='true'}" class="alert alert-success fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <span th:text="#{admin.success.new.user }">L'opération a été traitée avec succès !</span>
+    </section>
+    <section th:if="${messageNewUser =='false'}" class="alert alert-danger fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <span th:text="#{admin.error.new.user}">L'opération n'a pas été traitée correctement !</span>
+    </section>
+
+    <section th:if="${updateUser =='true'}" class="alert alert-success fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <span th:text="#{admin.update.user.success}">L'utilisateur a été mis à jour avec succès !</span>
+    </section>
+    <section th:if="${updateUser =='false'}" class="alert alert-danger fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <span th:text="#{admin.update.user.error}" >Echec de la mise à jour !</span>
+    </section>
+
+    <div class="row-fluid">
+    <table id="myTableId"
+           dt:table="true"
+           dt:filterable="false"
+           dt:theme="bootstrap3"
+           dt:pagingType="bootstrap_full_numbers">
+      <thead>
+      <tr>
+        <th th:text="#{admin.user.list.login}">Login</th>
+        <th th:text="#{admin.user.new.creation.date}">Login</th>
+      </tr>
+      </thead>
+      <tbody  th:if="${irisUserList != null}" th:remove="all-but-first">
+      <tr th:each="row : ${irisUserList.rows}">
+        <td th:text="${row.login}">User</td>
+        <td th:text="${row.creationDate}">User</td>
+        <td align="center" id="irisUser">
+          <a class="editAdminUser" th:id="${row.id}" data-toggle="modal" data-target="#edit_user"><span th:title="#{user.button.edit.title}" class="glyphicon glyphicon-edit"></span></a>
+          &nbsp; &nbsp;
+          <a href="#"><span class="glyphicon glyphicon-trash" th:title="#{user.button.disable.title}" ></span></a>
+
+        </td>
+
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+    <div>
+      <button value="newUser" type="button" id="addNewUser" class="btn btn-success"
+              data-toggle="modal" data-target="#new_user" th:style="'float: right;'" th:text="#{admin.user.new.user}">
+        <span class="glyphicon glyphicon-plus text-success"></span>
+        Nouveau
+      </button>
+    </div>
+
+    <!--/*/ <th:block th:include="user/modal/new_user:: new_user"></th:block> /*/-->
+    <!--/*/ <th:block th:include="user/modal/edit_user:: edit_user"></th:block> /*/-->
+
+  </section>
+  </div>
+
+  <script layout:fragment="js" th:inline="javascript">
+
+    $(document).ready(function () {
+      var modal_step = "#"+[[${modal_step}]];
+      $(modal_step).modal('show');
+
+    });
+
+
+  </script>
+
+</body>
+</html>

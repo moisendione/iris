@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head lang="en">
+  <title>IRIS by PeopleInput</title>
+
+</head>
+<body class="home_choice">
+<h1 layout:fragment="title_page" th:text="#{layout.contextual_menu.settings}"  class="title_page">Paramètres</h1>
+
+<div class="container">
+  <aside layout:fragment="contextual_menu">
+    <ul><li><a href="/dashboard" th:href="@{/dashboard}" th:text="#{layout.contextual_menu.dashboard}">Dashboard</a></li></ul>
+    <ul><li><a href="/settings" th:href="@{/settings}" class="actif"  th:text="#{layout.contextual_menu.settings}">Paramètres</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_general_parameter" href="/settings/new" th:href="@{'/settings/new'}">Paramètres généraux</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_rate" href="/settings/rates" th:href="@{'/settings/rates'}">Commissions et taux</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_type_compte" href="/accounts-type" th:href="@{'/accounts-type'}">Types de compte</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_compte" href="/settings/accounts" th:href="@{'/settings/accounts'}">Comptes</a></li></ul>
+    <ul><li><a href="/user" th:href="@{/user}" th:text="#{layout.contextual_menu.user}">Utilisateurs</a></li></ul>
+  </aside>
+
+  <section id="content" class="" layout:fragment="content">
+    <form  th:action="@{/settings/rates}" th:method="post" th:object="${ratesSettingsForm}">
+      <div class="form-group col ">
+        <label th:for="vatRate">VAT </label>
+        <input class="form-control " th:field="*{vatRate}" type="text"  />
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('vatRate')})" th:text="${errors.getFieldError('vatRate').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <label th:for="custodyFeesRate">custodyFeesRate </label>
+        <input class="form-control " th:field="*{custodyFeesRate}" type="text" />
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('custodyFeesRate')})" th:text="${errors.getFieldError('custodyFeesRate').defaultMessage}">Incorrect</span>
+      </div>
+      
+
+      <div class="form-group col">
+        <label th:for="sellCommissionRate">sellCommissionRate </label>
+        <input class="form-control" th:field="*{sellCommissionRate}" type="text" />
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('sellCommissionRate')})" th:text="${errors.getFieldError('sellCommissionRate').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col">
+        <label th:for="dividendCustomerRate">dividendCustomerRate </label>
+        <input class="form-control" th:field="*{dividendCustomerRate}" type="text" />
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('dividendCustomerRate')})" th:text="${errors.getFieldError('dividendCustomerRate').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col">
+        <label th:for="interestRate">interestRate </label>
+        <input class="form-control " th:field="*{interestRate}" type="input"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('interestRate')})" th:text="${errors.getFieldError('interestRate').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <label th:for="dividendIssuerRate">dividendIssuerRate </label>
+        <input class="form-control " th:field="*{dividendIssuerRate}" type="text"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('dividendIssuerRate')})" th:text="${errors.getFieldError('dividendIssuerRate').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <label th:for="buyCommissionRate">buyCommissionRate </label>
+        <input class="form-control " th:field="*{buyCommissionRate}" type="text"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('buyCommissionRate')})" th:text="${errors.getFieldError('buyCommissionRate').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <label th:for="brvmOrderCommissionRate">brvmOrderCommissionRate </label>
+        <input class="form-control " th:field="*{brvmOrderCommissionRate}" type="text"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('brvmOrderCommissionRate')})" th:text="${errors.getFieldError('brvmOrderCommissionRate').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <label th:for="dcbrOrderCommissionRate">dcbrOrderCommissionRate </label>
+        <input class="form-control " th:field="*{dcbrOrderCommissionRate}" type="text"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('dcbrOrderCommissionRate')})" th:text="${errors.getFieldError('dcbrOrderCommissionRate').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <label th:for="assetTransfertCommissionSgi">assetTransfertCommissionSgi </label>
+        <input class="form-control " th:field="*{assetTransfertCommissionSgi}" type="text"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('assetTransfertCommissionSgi')})" th:text="${errors.getFieldError('assetTransfertCommissionSgi').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <label th:for="assetTransfertCommissionDcbr">assetTransfertCommissionDcbr </label>
+        <input class="form-control " th:field="*{assetTransfertCommissionDcbr}" type="text"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('assetTransfertCommissionDcbr')})" th:text="${errors.getFieldError('assetTransfertCommissionDcbr').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <label th:for="assetCollateralCommissionSgi">assetCollateralCommissionSgi </label>
+        <input class="form-control " th:field="*{assetCollateralCommissionSgi}" type="text"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('assetCollateralCommissionSgi')})" th:text="${errors.getFieldError('assetCollateralCommissionSgi').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <label th:for="assetCollateralCommissionDcbr">assetCollateralCommissionDcbr </label>
+        <input class="form-control " th:field="*{assetCollateralCommissionDcbr}" type="text"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('assetCollateralCommissionDcbr')})" th:text="${errors.getFieldError('assetCollateralCommissionDcbr').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <button type="submit" class="btn btn-default" >Enregistrer</button>
+
+      </div>
+
+    </form>
+
+  </section>
+</div>
+</body>
+</html>

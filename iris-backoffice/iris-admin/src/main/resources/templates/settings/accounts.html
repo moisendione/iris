@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+      layout:decorator="layout">
+<head lang="en">
+  <title>IRIS by PeopleInput</title>
+
+</head>
+<body class="home_choice">
+<h1 layout:fragment="title_page" th:text="#{layout.contextual_menu.settings}" class="title_page">Paramètres</h1>
+
+<div class="container">
+  <aside layout:fragment="contextual_menu">
+    <ul><li><a href="/dashboard" th:href="@{/dashboard}" th:text="#{layout.contextual_menu.dashboard}">Dashboard</a></li></ul>
+    <ul><li><a href="/settings" th:href="@{/settings}" class="actif"  th:text="#{layout.contextual_menu.settings}">Paramètres</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_general_parameter" href="/settings/new" th:href="@{'/settings/new'}">Paramètres généraux</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_rate" href="/settings/rates" th:href="@{'/settings/rates'}">Commissions et taux</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_type_compte" href="/accounts-type" th:href="@{'/accounts-type'}">Types de compte</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_compte" href="/settings/accounts" th:href="@{'/settings/accounts'}">Comptes</a></li></ul>
+    <ul><li><a href="/user" th:href="@{/user}" th:text="#{layout.contextual_menu.user}">Utilisateurs</a></li></ul>
+  </aside>
+  <section id="content" class="" layout:fragment="content">
+    <h4 th:style="'text-align: center;'">Plan comptable</h4>
+
+    <section th:if="${msgSubmitAddAccountForm =='true'}" class="alert alert-success fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <span th:text="#{settings.accounts.list.msg.addaccount}">Un nouveau compte a été ajouté avec succès !</span>
+    </section>
+    <section th:if="${msgSubmitEditAccountForm =='true'}" class="alert alert-success fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <span th:text="#{settings.accounts.list.msg.editaccount}">Vous avez modifier le compte avec succès !</span>
+    </section>
+    <section th:if="${msgSubmitAddAccountForm =='false'}" class="alert alert-danger fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <span th:text="#{settings.accounts.list.msg.accountimported}">Le fichier sélectionné ne respecte pas le bon format !</span>
+    </section>
+
+
+    <div class="row-fluid">
+      <table id="myTableId"
+             dt:table="true"
+             dt:filterable="false"
+             dt:theme="bootstrap3"
+             dt:pagingType="bootstrap_full_numbers" class="display">
+        <thead>
+        <tr>
+          <th th:style="'text-align: center;'" th:text="#{settings.accounts.list.column.accountnumber}">Numéro</th>
+          <th th:style="'text-align: center;'" th:text="#{settings.accounts.list.column.description}">Description</th>
+          <th th:style="'text-align: center;'" th:text="#{settings.accounts.list.column.balance}">balance</th>
+          <th th:style="'text-align: center;'" th:text="#{settings.accounts.list.column.type}">Type</th>
+        </tr>
+        </thead>
+        <tbody th:remove="all-but-first" id="tbodyAccounts">
+        <tr th:each="accountRow : ${accountList.rows}" th:if="${accountList != null}" th:data="${accountRow.accountNumber}">
+          <td th:text="${accountRow.accountNumber}">Numéro</td>
+          <td th:text="${accountRow.description}">Description</td>
+          <td th:text="${#numbers.formatDecimal(accountRow.balance, 0, 'DEFAULT', 2, 'DEFAULT')}" th:style="'text-align: right;'">balance</td>
+          <td th:style="'text-align: center;'">
+            <span th:text="${accountRow.accountType}">419</span> -
+            <span th:text="${accountRow.descriptionAccountType}">Desc</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!--<div class="create_account" >
+      <a data-toggle="modal" data-target="#add_accounts_import" id="btnNewAccount">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+      </a>
+    </div> -->
+    <div class="row">
+      <div class="col-md-6" th:style="'float: right; width: 19%;'">
+        <div class="dropdown">
+          <button class="btn dropdown-toggle btn-red" type="button" data-toggle="dropdown" th:style="'color: white;'">Nouveau
+            <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a data-toggle="modal" data-target="#add_account">Créer manuellement</a></li>
+            <li><a data-toggle="modal" data-target="#add_accounts_import">Importer (excel)</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <input th:value="${isDetailAccount}" id="idIsDetailAccount"  type="hidden"/>
+    <input type="hidden" th:value="${isAddAccount}" id="idIsAddAccount" />
+    <!--/*/ <th:block th:include="settings/modal/edit_account:: edit_account"></th:block> /*/-->
+    <!--/*/ <th:block th:include="settings/modal/add_account:: add_account"></th:block> /*/-->
+    <!--/*/ <th:block th:include="settings/modal/add_accounts_import:: add_accounts_import"></th:block> /*/-->
+  </section>
+</div>
+</body>
+</html>

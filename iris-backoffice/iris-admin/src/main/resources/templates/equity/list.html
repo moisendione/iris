@@ -1,0 +1,49 @@
+
+<div layout:fragment="body"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     xmlns:th="http://www.thymeleaf.org"
+     layout:decorator="base">
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Liste des Actions
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div th:if="${not #lists.isEmpty(equities)}">
+        <h2>Equity List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>ISIN Code</th>
+                <th>Symbol</th>
+                <th>Symbol</th>
+                <th>Reference index</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="equity : ${equities}">
+                <td th:text="${equity.id}"><a href="/equity/${equity.id}">Id</a></td>
+                <td th:text="${equity.name}">name</td>
+                <td th:text="${equity.isinCode}">ISIN Code</td>
+                <td th:text="${equity.symbol}">Symbol</td>
+                <td th:text="${equity.ticker}">Ticker</td>
+                <td th:text="${equity.benchmarkIndex}"> Reference Index</td>
+                <td><a th:href="${'/equity/' + equity.id}">View</a></td>
+                <td><a th:href="${'/equity/edit/' + equity.id}">Edit</a></td>
+                <td><a th:href="${'/equity/delete/' + equity.id}">Delete</a></td>
+            </tr>
+        </table>
+
+  </div>
+                </div></div> </div></div></div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head lang="en">
+  <title>IRIS by PeopleInput</title>
+
+</head>
+<body class="home_choice">
+<div class="container">
+  <h1 layout:fragment="title_page"  class="title_page">Dashboard</h1>
+
+  <section id="content" class="" layout:fragment="content">
+
+  <!-- Values of graph -->
+  <input type="hidden" th:value="${orderStatusLibelle}" id="orderStatusLibelle" />
+  <input type="hidden" th:value="${orderStatusData}" id="orderStatusData" />
+  <input type="hidden" id="idIsDashboard" th:value="${isDashboard}" />
+  <input type="hidden" th:value="${commissionOperationData}" id="commissionOperationData" />
+
+  <div class="row" th:style="'margin-top: 15px;'">
+    <h4 th:style="'text-align: center;'">Ordres</h4>
+    <div class="col-md-6 panel">
+       <fieldset class="bordered">
+         <legend>Pourcentage nombre d'ordres par etat</legend>
+         <div id="piechart_order">
+
+         </div>
+       </fieldset>
+    </div>
+    <div class="col-md-6 panel">
+      <fieldset class="bordered">
+        <legend>Nombre d'ordres par etat</legend>
+        <div id="histogram_order">
+
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" >
+      <fieldset class="bordered">
+        <legend>Commissions sur les operations (depuis un an)</legend>
+        <div id="sgi_commission">
+
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en"></head>
+<body>
+<section th:fragment="edit_account">
+  <form th:action="@{'/validate/update-account'}" th:method="post" th:object="${accountForm}" id="formAccountSettings">
+    <div class="modal fade" id="edit_account" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+         aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" th:style="'display:block'">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">
+              <legend>
+                <h4 th:style="'color:white'">
+                  <span th:text="#{settings.accounts.edit.account}">Compte</span>
+                  <span th:text="${accountForm.accountNumber}"></span>
+                </h4>
+              </legend>
+            </h4>
+
+          </div>
+          <div class="modal-body">
+            <!-- Message error-->
+            <section th:if="${msgSubmitAccountForm =='false'}" class="alert alert-danger fade in">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <span th:text="#{order.execute.message.error}">Error</span>
+            </section>
+            <input type="hidden" th:field="*{formAction}"/>
+
+
+                  <div class="form-group col">
+                    <label th:for="accountNumberEdit" th:text="#{settings.accounts.new.label.accountnumber}">Numéro compte : </label>
+                    <input th:value="${accountForm.accountNumber}" id="accountNumberEdit" class="form-control" disabled="disabled"/>
+                    <input th:field="*{accountNumber}" type="hidden"/>
+                  </div>
+
+
+                  <div class="form-group col">
+                    <label th:for="balance">Balance : </label>
+                    <input th:value="${#numbers.formatDecimal(accountForm.balance, 0, 'DEFAULT', 2, 'DEFAULT')}"
+                           th:if="${accountForm.balance != null}" class="form-control" disabled="disabled"/>
+                    <input th:field="*{balance}" class="form-control hidden"/>
+                  </div>
+
+                  <div class="form-group col">
+                    <label th:for="accountTypeAccountNumber" th:text="#{settings.accounts.new.label.type}">Type : </label>
+                    <input th:value="${accountForm.accountTypeAccountNumber}" type="number" class="form-control" disabled="disabled"/>
+                    <input th:field="*{accountTypeAccountNumber}" class="form-control hidden"/>
+                  </div>
+
+                  <div class="form-group col">
+                    <label th:for="description" th:text="#{settings.accounts.new.label.description}">Libellé : </label>
+                    <textarea th:field="*{description}" id="description" class="form-control" />
+                  </div>
+
+
+          </div>
+
+          <div class="modal-footer">
+            <div class="row">
+              <button type="submit" href="#" class="btn btn-success" th:style="'float:right; margin-right: 10px'">
+                <span th:text="#{settings.accounts.new.btn.save}">Enregistrer</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+</body>
+</html>

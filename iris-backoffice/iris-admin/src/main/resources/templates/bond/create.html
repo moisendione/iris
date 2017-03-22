@@ -1,0 +1,58 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     xmlns:th="http://www.thymeleaf.org"
+     layout:decorator="base">
+
+    <h1 layout:fragment="header">
+            Bond
+    </h1>
+
+    <div layout:fragment="body">
+
+          <form action="#" th:action="@{/bond}" th:object="${bondForm}" method="POST">
+            <div class="form-group">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:error="*{name}">
+                    Champs requis.
+                </div>
+                <label>Nom Obligation :</label>
+                <input type="text" th:field="*{name}" class="form-control" placeholder="name"/><br/>
+            </div>
+            <div class="form-group">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('principalAmount')}" th:error="*{principalAmount}">
+                    Champs requis.
+                </div>
+                <label>Valeur Nominale :</label>
+              <input type="text" th:field="*{principalAmount}" class="form-control" placeholder="Valeur Nominale"/><br/>
+            </div>
+
+            <div class="form-group">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('ticker')}" th:error="*{ticker}">
+                    Champs requis.
+                </div>
+                <label>Symbole :</label>
+              <input type="text" th:field="*{ticker}" class="form-control" placeholder="Symbole"/><br/>
+            </div>
+
+            <div class="form-group">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('isinCode')}" th:error="*{isinCode}">
+                    Champs requis.
+                </div>
+                <label>Code ISIN :</label>
+              <input type="text" th:field="*{isinCode}" class="form-control" placeholder="codeIsin"/><br/>
+            </div>
+
+<!--
+            <div class="form-group">
+              <label>Liste des marchés :</label>
+              <select class="form-control">
+                <option th:if="${#lists.isEmpty(markets)}">Aucun Marché</option>
+                <option th:each="market : ${markets}" th:text="${market.name}" th:value="${market.id}"></option>
+              </select>
+            </div>
+-->
+            <div style="clear:both; display:block;height:10px;"></div>
+            <input type="submit" class="btn btn-default pull-right" value="Save"/>
+          </form>
+
+    </div>
+</div>

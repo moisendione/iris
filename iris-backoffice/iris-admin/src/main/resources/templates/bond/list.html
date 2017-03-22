@@ -1,0 +1,57 @@
+<div layout:fragment="list"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     xmlns:th="http://www.thymeleaf.org"
+     layout:decorator="base">
+
+  <div id="page-wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">
+          Bond List
+        </h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>ISIN Code</th>
+              <th>View</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(bonds)}">
+              <td colspan="4" align="center">Pas d'Obligation enregistrée.</td>
+            </tr>
+            <tr th:each="bond : ${bonds}">
+              <td th:text="${bond.id}"></td>
+              <td th:text="${bond.name}"></td>
+              <td th:text="${bond.isinCode}"></td>
+              <td><a th:href="@{/bond/{id}(id=${bond.id})}">View</a></td>
+              <td><a th:href="@{/bond/edit/{id}(id=${bond.id})}">Edit</a></td>
+              <td><a th:href="@{/bond/delete/{id}(id=${bond.id})}">Delete</a></td>
+ <!--             <td align="center">
+                <a th:href="@{/bond/{id}(id=${bond.id})}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                &nbsp; &nbsp;
+                <a th:href="@{/bond/edit/{id}(id=${bond.id})}"><span class="glyphicon glyphicon-edit"></span></a>
+                &nbsp; &nbsp;
+                <a th:href="@{/bond/delete/{id}(id=${bond.id})}"><span
+                    class="glyphicon glyphicon-trash"></span></a>
+              </td>
+-->
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

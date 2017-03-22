@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+  <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/css/bootstrap.min.css}"/>
+  <!-- AJOUT FICHIER CSS CONEXION -->
+  <link href="/css/connexion.css" rel="stylesheet" media="screen" th:href="@{/css/connexion.css}"/>
+  <title>IRIS by PeopleInput</title>
+</head>
+
+
+<body class="login-page">
+
+<div class="container">
+<section class="row">
+
+  <div class="box_connexion">
+    <!-- LOGO IRIS -->
+    <div class="col-xs-12 title">
+      <img th:src="@{/images/logo_connexion.png}" src="../../static/images/logo_connexion.png" />
+    </div>
+
+    <!-- FORMULAIRE CONEXION -->
+    <div class="col-xs-12 panel panel-default">
+      <section class="panel-body">
+        <div th:if="${param.error}" class="alert alert-danger">
+          Invalid username and password.
+        </div>
+        <div th:if="${param.logout}" class="alert alert-info">
+          You have been logged out.
+        </div>
+
+
+        <div class="col-xs-12 txt_connex">
+          <img th:src="@{/images/txt_connexion.jpg}" src="../../static/images/txt_connexion.jpg" />
+        </div>
+
+
+        <form class="form-horizontal" th:action="@{/login}" method="post">
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+          <div class="form-group">
+            <!--label class="col-md-3 control-label">User Name :</label-->
+            <div class="col-xs-12">
+              <input type="text" name="username" placeholder="Nom d'utilisateur" class="form-control" th:style="'background:url(' + @{/images/picto_user.png} + ') no-repeat 10px center #e6e6e6;'"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <!--label class="col-md-3 control-label">Password :</label-->
+            <div class="col-xs-12">
+              <input type="password" name="password" placeholder="Mot de Passe" class="form-control" th:style="'background:url(' + @{/images/picto_pass.png} + ') no-repeat 10px center #e6e6e6;'"/>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;">
+            <button type="submit" class="btn btn-default">Se connecter</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 copy">
+      <img th:src="@{/images/logo_iris.png}" src="../../static/images/logo_iris.png" />
+      <span th:style="'display:block;margin-top:4px;'">Copyright IRIS © 2016</span>
+    </div>
+  </div>
+
+</section>
+</div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+      layout:decorator="layout">
+<head lang="en">
+  <title>IRIS by PeopleInput</title>
+
+</head>
+<body class="home_choice">
+<h1 layout:fragment="title_page" th:text="#{layout.contextual_menu.settings}" class="title_page">Paramètres</h1>
+
+<div class="container">
+  <aside layout:fragment="contextual_menu">
+    <ul><li><a href="/dashboard" th:href="@{/dashboard}" th:text="#{layout.contextual_menu.dashboard}">Dashboard</a></li></ul>
+    <ul><li><a href="/settings" th:href="@{/settings}" class="actif"  th:text="#{layout.contextual_menu.settings}">Paramètres</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_general_parameter" href="/settings/new" th:href="@{'/settings/new'}">Paramètres généraux</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_rate" href="/settings/rates" th:href="@{'/settings/rates'}">Commissions et taux</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_type_compte" href="/accounts-type" th:href="@{'/accounts-type'}">Types de compte</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_compte" href="/settings/accounts" th:href="@{'/settings/accounts'}">Comptes</a></li></ul>
+    <ul><li><a href="/user" th:href="@{/user}" th:text="#{layout.contextual_menu.user}">Utilisateurs</a></li></ul>
+  </aside>
+  <section id="content" class="" layout:fragment="content">
+    <h4 th:style="'text-align: center;'">Plan comptable</h4>
+
+    <section th:if="${msgSubmitAddAccountTypeForm =='true'}" class="alert alert-success fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <span th:text="#{settings.accounts.list.msg.addaccount}">Success</span>
+    </section>
+    <section th:if="${msgSubmitEditAccountTypeForm =='true'}" class="alert alert-success fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <span>Vous avez modifié le type de compte avec succès !</span>
+    </section>
+    <section th:if="${msgSubmitAddAccountTypeForm =='false'}" class="alert alert-danger fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <span th:text="#{settings.accounts.list.msg.accountimported}">Le fichier sélectionné ne respecte pas le bon format !</span>
+    </section>
+    <section th:if="${msgSubmitDeleteAccountTypeForm =='false'}" class="alert alert-danger fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <span th:text="#{accounttype.delete.msg.error}">Le type de compte ne peut pas être supprimé car il est associé à des comptes !</span>
+    </section>
+    <section th:if="${msgSubmitDeleteAccountTypeForm =='true'}" class="alert alert-success fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <span th:text="#{accounttype.delete.msg.success}">Suppression réussie !</span>
+    </section>
+
+
+    <div class="row-fluid">
+      <table id="myTableId"
+             dt:table="true"
+             dt:filterable="false"
+             dt:theme="bootstrap3"
+             dt:pagingType="bootstrap_full_numbers" class="display">
+        <thead>
+        <tr>
+          <th th:style="'text-align: center;'" th:text="#{accounttype.list.accountnumber}">Numéro</th>
+          <th th:style="'text-align: center;'" th:text="#{accounttype.list.description}">Description</th>
+          <th th:style="'text-align: center;'" th:text="#{accounttype.list.parent}">Parent</th>
+          <th th:style="'text-align: center;'">Actions</th>
+        </tr>
+        </thead>
+        <tbody th:remove="all-but-first" id="tbodyAccountType">
+        <tr th:each="accountTypeRow : ${accountTypeList.rows}" th:if="${accountTypeList != null}" th:data="${accountTypeRow.accountNumber}">
+          <td th:text="${accountTypeRow.accountNumber}">Numéro</td>
+          <td th:text="${accountTypeRow.type}">Type</td>
+          <td th:text="${accountTypeRow.parentAccountNumber}" th:style="'text-align: right;'">parent</td>
+          <td th:style="'text-align: center;'">
+            <span value="edit" title="Modifier"><span class="glyphicon glyphicon-edit btnEditAccountType"></span></span>
+            <span value="delete" title="Supprimer" th:style="'margin-left: 10px;'"><span class="glyphicon glyphicon-trash btnDeleteAccountType"></span></span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6" th:style="'float: right; width: 19%;'">
+        <div class="dropdown">
+          <button class="btn dropdown-toggle btn-red" type="button" data-toggle="dropdown" th:style="'color: white;'">
+             <span th:text="#{accounttype.list.btn.new}">Nouveau</span>
+            <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a data-toggle="modal" data-target="#add_account_type">
+              <span th:text="#{accounttype.list.btn.new.createmanually}">Créer manuellement</span>
+            </a></li>
+            <li><a data-toggle="modal" data-target="#add_account_type_import">
+              <span th:text="#{accounttype.list.btn.new.import}">Importer (excel)</span>
+            </a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <input th:value="${isDetailAccountType}" id="idIsDetailAccountType"  type="hidden"/>
+    <input type="hidden" th:value="${isAddAccountType}" id="idIsAddAccountType" />
+    <input type="hidden" th:value="${isEditAccountType}" id="idIsEditAccountType" />
+    <!--/*/ <th:block th:include="settings/modal/add_account_type:: add_account_type"></th:block> /*/-->
+    <!--/*/ <th:block th:include="settings/modal/add_account_type_import:: add_account_type_import"></th:block> /*/-->
+    <!--/*/ <th:block th:include="settings/modal/edit_account_type:: edit_account_type"></th:block> /*/-->
+    <!--/*/ <th:block th:include="settings/modal/delete_account_type:: delete_account_type"></th:block> /*/-->
+  </section>
+</div>
+</body>
+</html>

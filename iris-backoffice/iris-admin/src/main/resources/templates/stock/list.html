@@ -1,0 +1,51 @@
+
+<div layout:fragment="list"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     xmlns:th="http://www.thymeleaf.org"
+     layout:decorator="base">
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Stock List
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+
+
+                    <div th:if="${not #lists.isEmpty(stocks)}">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>ISIN Code</th>
+                                <th>Symbol</th>
+                                <th>Symbol</th>
+                                <th>Benchmark index</th>
+                                <th>View</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            <tr th:each="stock : ${stocks}">
+                                <td th:text="${stock.id}"><a href="/stock/${stock.id}">Id</a></td>
+                                <td th:text="${stock.name}">name</td>
+                                <td th:text="${stock.isinCode}">ISIN Code</td>
+                                <td th:text="${stock.symbol}">Symbol</td>
+                                <td th:text="${stock.ticker}">Ticker</td>
+                                <td th:text="${stock.benchmarkIndex}"> Benchmark Index</td>
+                                <td><a th:href="${'/stock/' + stock.id}">View</a></td>
+                                <td><a th:href="${'/stock/edit/' + stock.id}">Edit</a></td>
+                                <td><a th:href="${'/stock/delete/' + stock.id}">Delete</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

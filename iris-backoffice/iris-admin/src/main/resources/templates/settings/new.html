@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head lang="en">
+  <title>IRIS by PeopleInput</title>
+
+</head>
+<body class="home_choice">
+<h1 layout:fragment="title_page" th:text="#{layout.contextual_menu.settings}"  class="title_page">Paramètres</h1>
+
+<div class="container">
+  <aside layout:fragment="contextual_menu">
+    <ul><li><a href="/dashboard" th:href="@{/dashboard}" th:text="#{layout.contextual_menu.dashboard}">Dashboard</a></li></ul>
+    <ul><li><a href="/settings" th:href="@{/settings}" class="actif"  th:text="#{layout.contextual_menu.settings}">Paramètres</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_general_parameter" href="/settings/new" th:href="@{'/settings/new'}">Paramètres généraux</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_rate" href="/settings/rates" th:href="@{'/settings/rates'}">Commissions et taux</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_type_compte" href="/accounts-type" th:href="@{'/accounts-type'}">Types de compte</a></li></ul>
+    <ul class="sou_menu"><li><a class="sous_menu_compte" href="/settings/accounts" th:href="@{'/settings/accounts'}">Comptes</a></li></ul>
+    <ul><li><a href="/user" th:href="@{/user}" th:text="#{layout.contextual_menu.user}">Utilisateurs</a></li></ul>
+  </aside>
+
+  <section id="content" class="" layout:fragment="content">
+    <form  th:action="@{/settings/new}" th:method="post" th:object="${settingsForm}">
+      <div class="form-group col ">
+        <label th:for="companyName">Nom <span class="alert-danger">*</span></label>
+        <input class="form-control " th:field="*{companyName}" type="text" required="required" />
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('companyName')})" th:text="${errors.getFieldError('companyName').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <label th:for="registrationNumber">Registration Number <span class="alert-danger">*</span></label>
+        <input class="form-control " th:field="*{registrationNumber}" type="text" required="required"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('registrationNumber')})" th:text="${errors.getFieldError('registrationNumber').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col">
+        <label th:for="currency">Currency <span class="alert-danger">*</span></label>
+        <select class="form-control " th:field="*{currency}" type="text" required="required">
+          <option th:each="enumCurrency : ${T(com.peopleinput.iris.domain.enums.Currency).values()}"
+                  th:value="${enumCurrency}" th:text="${enumCurrency.name}"></option>
+        </select>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('currency')})" th:text="${errors.getFieldError('currency').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <label th:for="country">Country <span class="alert-danger">*</span></label>
+        <select class="form-control " th:field="*{country}" type="text" required="required">
+          <option th:each="enumCountry : ${T(com.peopleinput.iris.domain.enums.Country).values()}"
+                  th:value="${enumCountry}" th:text="${enumCountry.countryCode}"></option>
+        </select>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('country')})" th:text="${errors.getFieldError('country').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col">
+        <label th:for="economicZone">EconomicZone <span class="alert-danger">*</span></label>
+        <select class="form-control" th:field="*{economicZone}" type="text" required="required">
+          <option th:each="zone : ${T(com.peopleinput.iris.domain.enums.EconomicZone).values()}"
+                  th:value="${zone}" th:text="${zone.name}"></option>
+        </select>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('economicZone')})" th:text="${errors.getFieldError('economicZone').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col">
+        <label th:for="phoneNumber">Phone Number <span class="alert-danger">*</span></label>
+        <input class="form-control" th:field="*{phoneNumber}" type="text" required="required"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('phoneNumber')})" th:text="${errors.getFieldError('companyName').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col">
+        <label th:for="address">Address <span class="alert-danger">*</span></label>
+        <input class="form-control" th:field="*{address}" type="text" required="required"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('address')})" th:text="${errors.getFieldError('address').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col">
+        <label th:for="email">Email </label>
+        <input class="form-control " th:field="*{email}" type="email"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('email')})" th:text="${errors.getFieldError('email').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <label>Website </label>
+        <input class="form-control " th:field="*{website}" type="text"/>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('website')})" th:text="${errors.getFieldError('website').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <label th:for="description">Description</label>
+        <textarea class="form-control " th:field="*{description}" rows="3"></textarea>
+        <span class="alert-danger" th:if="(${errors} and ${errors.hasFieldErrors('description')})" th:text="${errors.getFieldError('description').defaultMessage}">Incorrect</span>
+      </div>
+
+      <div class="form-group col ">
+        <button type="submit" class="btn btn-default" >Enregistrer</button>
+
+      </div>
+
+    </form>
+
+  </section>
+</div>
+</body>
+</html>

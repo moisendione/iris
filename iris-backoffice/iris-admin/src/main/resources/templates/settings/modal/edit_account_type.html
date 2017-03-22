@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en"></head>
+<body>
+<section th:fragment="edit_account_type">
+  <form th:action="@{'/validate/update-account-type'}" th:if="${accountTypeForm != null}" th:method="post" th:object="${accountTypeForm}" id="formAccountSettings">
+    <div class="modal fade" id="edit_account_type" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+         aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" th:style="'display:block'">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">
+              <legend>
+                <h4 th:style="'color:white'">
+                  <span th:text="#{accounttype.modal.edit.title}">Modification du type de compte</span>
+                  <span th:text="${accountTypeForm.accountNumber}"></span>
+                </h4>
+              </legend>
+            </h4>
+
+          </div>
+          <div class="modal-body">
+            <!-- Message error-->
+            <section th:if="${msgSubmitAccountTypeForm =='false'}" class="alert alert-danger fade in">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <span th:text="#{order.execute.message.error}">Error</span>
+            </section>
+            <input type="hidden" th:field="*{formAction}"/>
+
+
+            <div class="form-group col">
+              <label th:for="accountNumberAccountTypeEdit" th:text="#{accounttype.list.accountnumber}">Numéro</label>
+              <input th:value="${accountTypeForm.accountNumber}" id="accountNumberAccountTypeEdit" disabled="disabled" class="form-control"/>
+              <input th:field="*{accountNumber}" type="hidden"/>
+            </div>
+
+            <div class="form-group col">
+              <label th:for="typeAccountTypeEdit" th:text="#{accounttype.list.description}">Libellé : </label>
+              <input th:field="*{type}" type="text" id="typeAccountTypeEdit" class="form-control" required="required"/>
+            </div>
+
+            <div class="form-group col">
+              <label th:for="parentAccountNumberAccountTypeEdit" th:text="#{accounttype.list.parent}">Parent : </label>
+              <input th:field="*{parentAccountNumber}" id="parentAccountNumberAccountTypeEdit" class="form-control"/>
+            </div>
+
+
+          </div>
+
+          <div class="modal-footer">
+            <div class="row">
+              <button type="submit" href="#" class="btn btn-success" th:style="'float:right; margin-right: 10px'">
+                <span th:text="#{settings.accounts.new.btn.save}">Enregistrer</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+</body>
+</html>
